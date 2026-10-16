@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DeveloperOSToolRegistry",
+  "type": "object",
+  "required": ["version", "suites", "tools"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "suites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "category", "target_env", "repo_name"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "category": { "type": "string" },
+          "target_env": { "type": "string", "enum": ["streamlit", "cloudflare_pages", "extension"] },
+          "repo_name": { "type": "string" },
+          "deployment_url": { "type": "string" }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "suite_id", "category", "execution_env", "status", "version"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "suite_id": { "type": "string" },
+          "category": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "execution_env": { "type": "string", "enum": ["browser", "streamlit", "cli", "extension"] },
+          "status": { "type": "string", "enum": ["active", "in_development", "planned", "deprecated"] },
+          "version": { "type": "string" },
+          "privacy_level": { "type": "string", "enum": ["ephemeral_client_only", "ephemeral_server_memory"] }
+        }
+      }
+    }
+  }
+}
